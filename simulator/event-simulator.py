@@ -28,10 +28,10 @@ def send_event(tenant_id, event_type, value):
     )
     
     try:
-        with urllib.request.urlopen(req, timeout=3) as response:
-            if response.status == 200:
+        with urllib.request.urlopen(req, timeout=15) as response:
+            if response.status in (200, 201, 202):
                 print(f"[SUCCESS] Sent {event_type}={value:.2f} for {tenant_id}", flush=True)
-    except urllib.error.URLError as e:
+    except Exception as e:
         print(f"[ERROR] Failed to send event to {API_URL}: {e}", flush=True)
 
 def main():
