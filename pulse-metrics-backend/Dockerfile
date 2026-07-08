@@ -19,7 +19,7 @@ COPY aiven-ca.pem .
 RUN mkdir -p /root/.postgresql && \
     apt-get update && apt-get install -y curl && \
     curl -sS -o /root/.postgresql/root.crt 'https://cockroachlabs.cloud/clusters/1f8539d0-195c-410a-96a1-7874197dadd3/cert' && \
-    keytool -importcert -alias aiven-ca -file aiven-ca.pem -keystore "$JAVA_HOME/lib/security/cacerts" -storepass changeit -noprompt && \
+    keytool -importcert -alias aiven-ca -file aiven-ca.pem -cacerts -storepass changeit -noprompt && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 EXPOSE 8080
