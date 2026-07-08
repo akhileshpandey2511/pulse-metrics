@@ -1,0 +1,54 @@
+spring:
+  application:
+    name: pulse-metrics-backend
+
+  datasource:
+    url: jdbc:postgresql://blast-lynx-28472.j77.aws-ap-south-1.cockroachlabs.cloud:26257/apps?sslmode=verify-full&sslrootcert=/Users/akhilesh/.postgresql/root.crt
+    username: akhil
+    password: N-g869l7uZlA4W2G90yZpg
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    consumer:
+      group-id: pulse-metrics-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: anmolkhanna1121@gmail.com
+    password: gouirooxbcmqfubq
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+server:
+  port: 8080
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: INFO
+    org.springframework.kafka: WARN
